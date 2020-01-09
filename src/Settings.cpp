@@ -364,6 +364,9 @@ void Settings::setUiScale(double scale) {
     if (auto* p = getProps())
         p->setValue(uiScaleKey, scale);
 }
+int Settings::getScaledSize(int size) const {
+    return (int) this->getUiScale() * size;
+}
 
 void Settings::addItemsToMenu (Globals& world, PopupMenu& menu)
 {

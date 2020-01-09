@@ -151,14 +151,13 @@ private:
         engine->applySettings (settings);
         world.setEngine (engine); // this will also instantiate the session
         controller = new AppController (world);
-        juce::Desktop::getInstance().setGlobalScaleFactor(settings.getUiScale());
 
 
         setupPlugins();
         setupKeyMappings();
         setupAudioEngine();
         setupMidiEngine();
-
+        setupUi();
         sendActionMessage ("finishedLaunching");
     }
     
@@ -171,6 +170,11 @@ private:
     {
         auto& midi = world.getMidiEngine();
         midi.applySettings (world.getSettings());
+    }
+
+    void setupUi()
+    {
+        juce::Desktop::getInstance().setGlobalScaleFactor(world.getSettings().getUiScale());
     }
 
     void setupKeyMappings()

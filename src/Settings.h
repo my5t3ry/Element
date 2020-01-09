@@ -113,6 +113,7 @@ public:
     void setOscHostPort (int);
     double getUiScale() const;
     void setUiScale (double);
+    int getScaledSize(int) const;
 
 private:
     PropertiesFile* getProps() const;

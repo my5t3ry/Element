@@ -422,7 +422,6 @@ namespace Element {
             uiScaleSlider.textFromValueFunction = [this](double value) -> String {
                 return String(value);
             };
-            
             uiScaleSlider.setRange(0.1, 2.0, 0.02);
             uiScaleSlider.setValue((double) settings.getUiScale());
             uiScaleSlider.setSliderStyle(Slider::IncDecButtons);
@@ -981,7 +980,7 @@ PreferencesComponent::PreferencesComponent (Globals& g, GuiController& _gui)
     groupComponent->setVisible (false);
     //[/UserPreSize]
 
-    setSize (600 * world.getSettings().getUiScale(), 500 * world.getSettings().getUiScale());
+    setSize(world.getSettings().getScaledSize(600), world.getSettings().getScaledSize(500));
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -1023,11 +1022,11 @@ void PreferencesComponent::resized()
 {
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
-    setSize(600 * world.getSettings().getUiScale(), 500 * world.getSettings().getUiScale());
+    setSize(world.getSettings().getScaledSize(600), world.getSettings().getScaledSize(500));
 
-    pageList->setBounds (8 * world.getSettings().getUiScale(), 8 * world.getSettings().getUiScale(), 184 * world.getSettings().getUiScale(), 480 * world.getSettings().getUiScale());
-    groupComponent->setBounds (200 * world.getSettings().getUiScale(), 8 * world.getSettings().getUiScale(), 392 * world.getSettings().getUiScale(), 480 * world.getSettings().getUiScale());
-    pageComponent->setBounds (208 * world.getSettings().getUiScale(), 32 * world.getSettings().getUiScale(), 376 * world.getSettings().getUiScale(), 448 * world.getSettings().getUiScale());
+    pageList->setBounds(world.getSettings().getScaledSize(8), world.getSettings().getScaledSize(8), world.getSettings().getScaledSize(184), world.getSettings().getScaledSize(480));
+    groupComponent->setBounds(world.getSettings().getScaledSize(200), world.getSettings().getScaledSize(8) , world.getSettings().getScaledSize(392), world.getSettings().getScaledSize(480));
+    pageComponent->setBounds(world.getSettings().getScaledSize(208), world.getSettings().getScaledSize(32), world.getSettings().getScaledSize(376), world.getSettings().getScaledSize(448));
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
