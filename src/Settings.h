@@ -48,6 +48,7 @@ public:
     static const char* workspaceKey;
     static const char* midiEngineKey;
     static const char* oscHostPortKey;
+    static const char* uiScaleKey;
     static const char* oscHostEnabledKey;
 
     std::unique_ptr<XmlElement> getLastGraph() const;
@@ -110,6 +111,8 @@ public:
     void setOscHostEnabled (bool);
     int getOscHostPort() const;
     void setOscHostPort (int);
+    double getUiScale() const;
+    void setUiScale (double);
 
 private:
     PropertiesFile* getProps() const;

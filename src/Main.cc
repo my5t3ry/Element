@@ -57,7 +57,11 @@ public:
         ignoreUnused (path);
         
         updateSettingsIfNeeded();
+        double scaleFactor; // class member
+//        scaleFactor = juce::Desktop::getInstance().getDisplays().getMainDisplay().scale; //in class' constructor
+//        if (scaleFactor > 1) {
 
+//            } //after the Openglcontext was initialized
         DeviceManager& devices (world.getDeviceManager());
         auto* props = settings.getUserSettings();
         if (auto dxml = props->getXmlValue ("devices"))
@@ -65,6 +69,7 @@ public:
             devices.initialise (DeviceManager::maxAudioChannels,
                                 DeviceManager::maxAudioChannels, 
                                 dxml.get(), true, "default", nullptr);
+            
         }
         else
         {
@@ -146,6 +151,8 @@ private:
         engine->applySettings (settings);
         world.setEngine (engine); // this will also instantiate the session
         controller = new AppController (world);
+        juce::Desktop::getInstance().setGlobalScaleFactor(settings.getUiScale());
+
 
         setupPlugins();
         setupKeyMappings();

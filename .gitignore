@@ -25,6 +25,8 @@ node_modules
 /libs/eldb/*.db
 /libs/eldb/eldb
 
+nbproject
+
 /delete.txt
 /deploy/
 /tools/deploy/

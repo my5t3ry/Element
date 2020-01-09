@@ -39,6 +39,7 @@ const char* Settings::legacyInterfaceKey        = "legacyInterface";
 const char* Settings::workspaceKey              = "workspace";
 const char* Settings::midiEngineKey             = "midiEngine";
 const char* Settings::oscHostPortKey            = "oscHostPortKey";
+const char* Settings::uiScaleKey                = "uiScaleKey";
 const char* Settings::oscHostEnabledKey         = "oscHostEnabledKey";
 
 enum OptionsMenuItemId
@@ -349,6 +350,19 @@ void Settings::setOscHostPort (int port)
         return;
     if (auto* p = getProps())
         p->setValue (oscHostPortKey, port);
+}
+
+double Settings::getUiScale() const {
+    if (auto* p = getProps())
+        return p->getDoubleValue(uiScaleKey, 1.0);
+    return juce::Desktop::getInstance().getGlobalScaleFactor();
+}
+
+void Settings::setUiScale(double scale) {
+    if (getUiScale() == scale)
+        return;
+    if (auto* p = getProps())
+        p->setValue(uiScaleKey, scale);
 }
 
 void Settings::addItemsToMenu (Globals& world, PopupMenu& menu)

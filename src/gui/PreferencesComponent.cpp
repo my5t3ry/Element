@@ -414,6 +414,24 @@ namespace Element {
             hidePluginWindows.getToggleStateValue().addListener (this);
 
             addAndMakeVisible (openLastSessionLabel);
+
+            addAndMakeVisible(uiScaleLabel);
+            uiScaleLabel.setFont(Font(12.0, Font::bold));
+            uiScaleLabel.setText("UI Scale", dontSendNotification);
+            uiScaleSlider.textFromValueFunction = [this](double value) -> String {
+                return String(value);
+            };
+            
+            uiScaleSlider.setRange(0.1, 2.0, 0.02);
+            uiScaleSlider.setValue((double) settings.getUiScale());
+            uiScaleSlider.setSliderStyle(Slider::IncDecButtons);
+            uiScaleSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 22);
+            uiScaleSlider.onValueChange = [this]() {
+                juce::Desktop::getInstance().setGlobalScaleFactor(uiScaleSlider.getValue());
+                settings.setUiScale(uiScaleSlider.getValue());  
+            };
+            addAndMakeVisible(uiScaleSlider);
+
            #ifdef EL_PRO
             openLastSessionLabel.setText ("Open last used Session", dontSendNotification);
            #else
@@ -513,6 +531,8 @@ namespace Element {
             layoutSetting (r, hidePluginWindowsLabel, hidePluginWindows);
             layoutSetting (r, openLastSessionLabel, openLastSession);
             layoutSetting (r, askToSaveSessionLabel, askToSaveSession);
+
+
             
            #ifdef EL_PRO
             layoutSetting (r, defaultSessionFileLabel, defaultSessionFile, 190 - settingHeight);
@@ -525,6 +545,8 @@ namespace Element {
                 r.removeFromTop (spacingBetweenSections * 2);
                 pluginSettings.setBounds (r);
             }
+            layoutSetting(r, uiScaleLabel, uiScaleSlider);
+
         }
 
         void valueChanged (Value& value) override
@@ -582,6 +604,9 @@ namespace Element {
         Label clockSourceLabel;
         ComboBox clockSourceBox;
         Value clockSource;
+
+        Label uiScaleLabel;
+        Slider uiScaleSlider;
 
         Label checkForUpdatesLabel;
         SettingButton checkForUpdates;
