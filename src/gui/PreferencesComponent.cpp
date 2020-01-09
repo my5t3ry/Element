@@ -95,6 +95,7 @@ namespace Element {
             return pageNames.indexOf (name);
         }
 
+
     private:
         friend class PreferencesComponent;
 
@@ -127,7 +128,7 @@ namespace Element {
 
             r.removeFromTop (spacingBetweenSections);
             auto r2 = r.removeFromTop (settingHeight);
-            label.setBounds (r2.removeFromLeft (getWidth() / 2));
+            label.setBounds (r2.removeFromLeft (getWidth() / 2) );
             setting.setBounds (r2.removeFromLeft (toggleWidth)
                                  .withSizeKeepingCentre (toggleWidth, toggleHeight));
         }
@@ -429,6 +430,7 @@ namespace Element {
             uiScaleSlider.onValueChange = [this]() {
                 juce::Desktop::getInstance().setGlobalScaleFactor(uiScaleSlider.getValue());
                 settings.setUiScale(uiScaleSlider.getValue());  
+                resized();
             };
             addAndMakeVisible(uiScaleSlider);
 
@@ -506,7 +508,7 @@ namespace Element {
         {
             const int spacingBetweenSections = 6;
             const int settingHeight = 22;
-            const int toggleWidth = 40;
+            const int toggleWidth = 40 ;
             const int toggleHeight = 18;
 
             Rectangle<int> r (getLocalBounds());
@@ -979,7 +981,7 @@ PreferencesComponent::PreferencesComponent (Globals& g, GuiController& _gui)
     groupComponent->setVisible (false);
     //[/UserPreSize]
 
-    setSize (600, 500);
+    setSize (600 * world.getSettings().getUiScale(), 500 * world.getSettings().getUiScale());
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -1021,10 +1023,11 @@ void PreferencesComponent::resized()
 {
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
+    setSize(600 * world.getSettings().getUiScale(), 500 * world.getSettings().getUiScale());
 
-    pageList->setBounds (8, 8, 184, 480);
-    groupComponent->setBounds (200, 8, 392, 480);
-    pageComponent->setBounds (208, 32, 376, 448);
+    pageList->setBounds (8 * world.getSettings().getUiScale(), 8 * world.getSettings().getUiScale(), 184 * world.getSettings().getUiScale(), 480 * world.getSettings().getUiScale());
+    groupComponent->setBounds (200 * world.getSettings().getUiScale(), 8 * world.getSettings().getUiScale(), 392 * world.getSettings().getUiScale(), 480 * world.getSettings().getUiScale());
+    pageComponent->setBounds (208 * world.getSettings().getUiScale(), 32 * world.getSettings().getUiScale(), 376 * world.getSettings().getUiScale(), 448 * world.getSettings().getUiScale());
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }

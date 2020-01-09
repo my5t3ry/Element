@@ -52,10 +52,12 @@ public:
 
 
 
+
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     class PageList;
     Globals& world;
+
     GuiController& gui;
     OwnedArray<Component> pages;
     //[/UserVariables]

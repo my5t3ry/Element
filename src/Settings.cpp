@@ -354,7 +354,7 @@ void Settings::setOscHostPort (int port)
 
 double Settings::getUiScale() const {
     if (auto* p = getProps())
-        return p->getDoubleValue(uiScaleKey, 1.0);
+        return p->getDoubleValue(uiScaleKey, juce::Desktop::getInstance().getGlobalScaleFactor());
     return juce::Desktop::getInstance().getGlobalScaleFactor();
 }
 
