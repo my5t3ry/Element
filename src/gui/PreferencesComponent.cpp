@@ -1023,7 +1023,6 @@ void PreferencesComponent::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
     setSize(world.getSettings().getScaledSize(600), world.getSettings().getScaledSize(500));
-
     pageList->setBounds(world.getSettings().getScaledSize(8), world.getSettings().getScaledSize(8), world.getSettings().getScaledSize(184), world.getSettings().getScaledSize(480));
     groupComponent->setBounds(world.getSettings().getScaledSize(200), world.getSettings().getScaledSize(8) , world.getSettings().getScaledSize(392), world.getSettings().getScaledSize(480));
     pageComponent->setBounds(world.getSettings().getScaledSize(208), world.getSettings().getScaledSize(32), world.getSettings().getScaledSize(376), world.getSettings().getScaledSize(448));

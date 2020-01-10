@@ -157,7 +157,7 @@ private:
         setupKeyMappings();
         setupAudioEngine();
         setupMidiEngine();
-        setupUi();
+        setupUiScale();
         sendActionMessage ("finishedLaunching");
     }
     
@@ -172,7 +172,7 @@ private:
         midi.applySettings (world.getSettings());
     }
 
-    void setupUi()
+    void setupUiScale()
     {
         juce::Desktop::getInstance().setGlobalScaleFactor(world.getSettings().getUiScale());
     }
