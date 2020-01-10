@@ -419,16 +419,13 @@ namespace Element {
             addAndMakeVisible(uiScaleLabel);
             uiScaleLabel.setFont(Font(12.0, Font::bold));
             uiScaleLabel.setText("UI Scale", dontSendNotification);
-            uiScaleSlider.textFromValueFunction = [this](double value) -> String {
-                return String(value);
-            };
             uiScaleSlider.setRange(0.1, 2.0, 0.02);
             uiScaleSlider.setValue((double) settings.getUiScale());
             uiScaleSlider.setSliderStyle(Slider::IncDecButtons);
             uiScaleSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 22);
             uiScaleSlider.onValueChange = [this]() {
+                settings.setUiScale(uiScaleSlider.getValue());
                 juce::Desktop::getInstance().setGlobalScaleFactor(uiScaleSlider.getValue());
-                settings.setUiScale(uiScaleSlider.getValue());  
                 resized();
             };
             addAndMakeVisible(uiScaleSlider);
